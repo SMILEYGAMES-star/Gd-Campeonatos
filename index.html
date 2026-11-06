@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GD LEVELS – BASTOS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a0818;--bg2:#141030;--card:#181438;--line:#2e2670;--tx:#ecebff;--mu:#9b97c9;--pu:#8a4dff;--bl:#2ea8ff;--ne:#b78cff}
+*{box-sizing:border-box;margin:0}
+body{background:radial-gradient(circle at 20% 0,#241660 0,transparent 45%),radial-gradient(circle at 90% 100%,#0b2a5c 0,transparent 40%),var(--bg);color:var(--tx);font:600 17px Rajdhani,sans-serif;min-height:100vh;background-attachment:fixed}
+body:before{content:"";position:fixed;inset:0;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:44px 44px;opacity:.12;pointer-events:none}
+h1,h2,h3,.logo{font-family:Orbitron,sans-serif}
+button,input,select,textarea{font:inherit;color:inherit}
+.hide{display:none!important}
+.screen{position:relative;min-height:100vh;animation:in .35s ease}
+@keyframes in{from{opacity:0;transform:translateY(14px)}to{opacity:1}}
+.center{display:grid;place-items:center;padding:24px;text-align:center}
+.box{max-width:460px;width:100%}
+.cube{width:64px;height:64px;margin:0 auto 22px;border:3px solid var(--ne);background:linear-gradient(135deg,var(--pu),var(--bl));border-radius:8px;box-shadow:0 0 30px #8a4dff88;display:grid;place-items:center;animation:spin 3s ease-in-out infinite}
+.cube:after{content:"";width:12px;height:12px;background:#fff;border-radius:2px;box-shadow:16px 0 #fff;margin-right:16px}
+@keyframes spin{0%,40%{transform:rotate(0)}60%,100%{transform:rotate(90deg)}}
+.logo{font-size:clamp(22px,5vw,32px);font-weight:800;letter-spacing:1px}
+.logo span{color:var(--ne);text-shadow:0 0 14px var(--pu)}
+.q{margin:6px 0 26px;color:var(--mu);font-size:20px}
+.btn{display:block;width:100%;border:2px solid var(--line);background:var(--card);padding:16px;border-radius:12px;font-weight:700;font-size:19px;cursor:pointer;margin-bottom:12px;transition:.18s}
+.btn:hover,.btn:focus-visible{border-color:var(--ne);box-shadow:0 0 18px #8a4dff66;transform:translateY(-2px);outline:0}
+.btn.pri{background:linear-gradient(90deg,var(--pu),var(--bl));border:0}
+.btn.sm{display:inline-block;width:auto;padding:9px 16px;margin:0;font-size:16px}
+.btn.red{border-color:#ff4d6d;color:#ff9aab}
+header{position:sticky;top:0;z-index:5;background:#0a0818ee;backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:12px 18px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+header .logo{font-size:18px;flex:1;min-width:200px}
+.badge{background:linear-gradient(90deg,#ff4d6d,#ff9a3d);color:#1a0808;padding:3px 10px;border-radius:99px;font-weight:700;font-size:14px}
+main{position:relative;max-width:1240px;margin:auto;padding:18px}
+.tabs{display:flex;gap:8px;margin-bottom:14px;overflow-x:auto}
+.tab{padding:10px 18px;border-radius:10px;border:2px solid var(--line);background:none;cursor:pointer;white-space:nowrap}
+.tab.on{background:var(--pu);border-color:var(--pu)}
+.bar{display:grid;grid-template-columns:1fr;gap:10px;margin-bottom:16px}
+@media(min-width:760px){.bar{grid-template-columns:2fr 1fr auto auto}}
+input,select,textarea{width:100%;background:var(--bg2);border:2px solid var(--line);border-radius:10px;padding:12px 14px}
+input:focus,select:focus,textarea:focus{outline:0;border-color:var(--ne)}
+.count{color:var(--mu);margin-bottom:12px}
+.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(270px,1fr))}
+.card{background:var(--card);border:2px solid var(--line);border-radius:14px;overflow:hidden;cursor:pointer;transition:.2s;position:relative}
+.card:hover{transform:translateY(-4px);border-color:var(--c,var(--ne));box-shadow:0 8px 28px -8px var(--c,var(--pu))}
+.thumb{aspect-ratio:16/9;background:linear-gradient(135deg,#1d1650,#0f2a5a);display:grid;place-items:center;font:800 40px Orbitron;color:#ffffff22;overflow:hidden}
+.thumb img{width:100%;height:100%;object-fit:cover}
+.info{padding:12px 14px}
+.info h3{font-size:16px;margin-bottom:4px}
+.meta{color:var(--mu);font-size:15px}
+.chip{display:inline-block;padding:2px 10px;border-radius:99px;font-size:14px;font-weight:700;color:#10091f;background:var(--c);margin-top:6px}
+.ill{--c:#fff}
+.ill .chip,.chip.ill{background:linear-gradient(90deg,#fff,#ffd23f,#ff4df0,#4dd8ff,#fff);background-size:300%;animation:sh 3s linear infinite}
+.card.ill{border-color:#fff;box-shadow:0 0 18px #ffffff44}
+@keyframes sh{to{background-position:300%}}
+.sec{margin-bottom:22px;background:var(--card);border:2px solid var(--line);border-left:6px solid var(--c);border-radius:12px;padding:12px 16px}
+.sec h3{display:flex;justify-content:space-between;font-size:16px}
+.sec li{list-style:none;padding:6px 0;border-top:1px solid var(--line);cursor:pointer}
+.sec li:hover{color:var(--ne)}
+.sec.ill{border-left-color:#ff4df0;background:linear-gradient(135deg,#1c1245,#2a0f3a)}
+.empty{text-align:center;color:var(--mu);padding:50px 10px;border:2px dashed var(--line);border-radius:14px}
+.modal{position:fixed;inset:0;background:#05030fcc;z-index:20;display:grid;place-items:center;padding:14px;overflow:auto;animation:in .2s}
+.mbox{background:var(--bg2);border:2px solid var(--line);border-radius:16px;padding:18px;width:100%;max-width:560px;max-height:94vh;overflow:auto}
+.mbox img.big{width:100%;border-radius:10px;margin-bottom:12px}
+label{display:block;margin:12px 0 5px;color:var(--mu)}
+.dgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:8px}
+.dopt{border:2px solid var(--line);background:var(--card);border-radius:10px;padding:9px 6px;text-align:center;cursor:pointer;font-size:15px}
+.dopt i{display:block;width:18px;height:18px;margin:0 auto 4px;background:var(--c);transform:rotate(45deg);border-radius:3px;box-shadow:0 0 10px var(--c)}
+.dopt.on{border-color:var(--c);box-shadow:0 0 14px var(--c);background:#241c58}
+.dopt.ill i{background:linear-gradient(135deg,#fff,#ff4df0,#4dd8ff)}
+.pv{margin-top:8px;position:relative}
+.pv img{width:100%;border-radius:10px}
+.row{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
+.row .btn{flex:1;margin:0}
+#toasts{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);z-index:50;display:grid;gap:8px;width:min(92vw,420px)}
+.toast{padding:12px 16px;border-radius:10px;background:#1f1a4d;border-left:5px solid var(--bl);animation:in .25s}
+.toast.err{border-color:#ff4d6d}.toast.ok{border-color:#4dff9a}
+.ld{position:fixed;inset:0;display:grid;place-items:center;background:var(--bg);z-index:60}
+.ld .cube{animation:spin 1.2s infinite}
+#conn{background:#ff4d6d;color:#1a0808;text-align:center;padding:6px}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="ld" id="ld"><div class="box center"><div class="cube"></div><p>Conectando ao Firebase…</p></div></div>
+<div id="toasts"></div>
+
+<section class="screen center hide" id="s-who"><div class="box">
+<div class="cube"></div><div class="logo">GD LEVELS <span>– BASTOS</span></div>
+<p class="q">QUEM É VOCÊ?</p>
+<button class="btn" id="b-vis">👀 SOU VISITANTE</button>
+<button class="btn" id="b-adm">🔑 SOU ADMINISTRADOR</button>
+</div></section>
+
+<section class="screen center hide" id="s-code"><div class="box">
+<h2>Código administrativo</h2><p class="q">Digite o código para liberar o painel.</p>
+<input type="password" id="code" placeholder="Código" autocomplete="off">
+<button class="btn pri" id="b-ok" style="margin-top:12px">ENTRAR</button>
+<button class="btn" id="b-back">Voltar</button>
+</div></section>
+
+<section class="screen hide" id="s-app">
+<div id="conn" class="hide">Sem conexão com o banco. Tentando reconectar…</div>
+<header>
+<div class="logo">GD LEVELS <span>– BASTOS</span></div>
+<span class="badge hide" id="admb">🔑 MODO ADMINISTRADOR</span>
+<button class="btn sm" id="b-ref">⟳ Atualizar</button>
+<button class="btn sm" id="b-exit">Sair</button>
+</header>
+<main>
+<button class="btn pri hide" id="b-new">+ PUBLICAR NOVO LEVEL</button>
+<div class="tabs"><button class="tab on" data-t="list">Levels</button><button class="tab" data-t="rank">Ranking</button><button class="tab" data-t="ill">ILL – IMPOSSIBLE LEVELS</button></div>
+<div id="v-list">
+<div class="bar"><input id="q" placeholder="Buscar por nome, criador ou ID…"><select id="fd"></select><button class="btn sm" id="b-sort">Mais recentes</button></div>
+</div>
+<div class="count" id="cnt"></div>
+<div id="out"></div>
+</main></section>
+
+<script type="module">
+import {initializeApp} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import {getAuth,signInAnonymously,onAuthStateChanged} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import {getDatabase,ref,onValue,get,set,push,update,remove,serverTimestamp} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+const cfg={apiKey:"AIzaSyAzBK4FgbQJ7sf_8f3PtsemPuBPpuB048M",authDomain:"lvlgd-230de.firebaseapp.com",projectId:"lvlgd-230de",storageBucket:"lvlgd-230de.firebasestorage.app",messagingSenderId:"697579259522",appId:"1:697579259522:web:6b37c11309aff27d61169b",measurementId:"G-7KV3V90PB4",databaseURL:"https://lvlgd-230de-default-rtdb.firebaseio.com/"};
+const app=initializeApp(cfg),auth=getAuth(app),db=getDatabase(app);
+
+const D=[["Auto","#f5d90a"],["Easy","#5dd6ff"],["Normal","#6ee06e"],["Hard","#ffb347"],["Harder","#ff7f50"],["Insane","#ff5fa2"],["Easy Demon","#c58bff"],["Medium Demon","#b05cff"],["Hard Demon","#ff4d6d"],["Insane Demon","#e0243d"],["Extreme Demon","#c4204f"],["ILL","#ffffff"]];
+const col=n=>(D.find(d=>d[0]===n)||[0,"#8a4dff"])[1];
+const $=id=>document.getElementById(id);
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+let levels=[],isAdmin=false,tab="list",newest=true,uid=null,loaded=false;
+
+function toast(m,t="info"){const e=document.createElement("div");e.className="toast "+t;e.textContent=m;$("toasts").append(e);setTimeout(()=>e.remove(),3800)}
+function show(id){["s-who","s-code","s-app"].forEach(s=>$(s).classList.toggle("hide",s!==id))}
+const fmt=t=>t?new Date(t).toLocaleDateString("pt-BR",{day:"2-digit",month:"short",year:"numeric"}):"—";
+
+/* ---------- Auth (anônima) + verificação de admin pelas regras do banco ---------- */
+async function checkAdmin(){
+  try{const s=await get(ref(db,"admins/"+uid));isAdmin=s.exists()}catch{isAdmin=false}
+}
+onAuthStateChanged(auth,async u=>{
+  if(u){uid=u.uid;await checkAdmin()}
+  $("ld").classList.add("hide");show("s-who");
+});
+signInAnonymously(auth).catch(e=>{$("ld").classList.add("hide");show("s-who");toast("Falha na autenticação anônima. Ative Anonymous no Firebase Auth.","err")});
+
+/* ---------- Dados em tempo real ---------- */
+function listen(){
+  if(loaded)return;loaded=true;
+  onValue(ref(db,"levels"),s=>{
+    const v=s.val()||{};levels=Object.entries(v).map(([id,l])=>({id,...l}));render();
+  },e=>toast("Erro ao ler os levels: "+e.code,"err"));
+  onValue(ref(db,".info/connected"),s=>$("conn").classList.toggle("hide",s.val()===true));
+}
+
+function enter(admin){
+  isAdmin=admin;
+  $("admb").classList.toggle("hide",!admin);$("b-new").classList.toggle("hide",!admin);
+  show("s-app");listen();render();
+}
+$("b-vis").onclick=()=>enter(false);
+$("b-adm").onclick=()=>{if(isAdmin)enter(true);else{$("code").value="";show("s-code");$("code").focus()}};
+$("b-back").onclick=()=>show("s-who");
+$("b-ok").onclick=async()=>{
+  if(!uid)return toast("Aguarde a conexão e tente de novo.","err");
+  try{await set(ref(db,"admins/"+uid),$("code").value);isAdmin=true;toast("Modo administrador liberado.","ok");enter(true)}
+  catch{toast("Código incorreto.","err")}
+};
+$("code").onkeydown=e=>{if(e.key==="Enter")$("b-ok").click()};
+$("b-exit").onclick=async()=>{
+  if(isAdmin){try{await remove(ref(db,"admins/"+uid))}catch{}isAdmin=false}
+  show("s-who");
+};
+$("b-ref").onclick=async()=>{
+  try{const s=await get(ref(db,"levels"));levels=Object.entries(s.val()||{}).map(([id,l])=>({id,...l}));render();toast("Lista atualizada.","ok")}
+  catch(e){toast("Não foi possível atualizar: "+e.code,"err")}
+};
+
+/* ---------- Filtros ---------- */
+$("fd").innerHTML='<option value="">Todas as dificuldades</option>'+D.map(d=>`<option>${d[0]==="ILL"?"ILL":d[0]}</option>`).join("");
+$("q").oninput=render;$("fd").onchange=render;
+$("b-sort").onclick=()=>{newest=!newest;$("b-sort").textContent=newest?"Mais recentes":"Mais antigos";render()};
+document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>{
+  document.querySelectorAll(".tab").forEach(x=>x.classList.toggle("on",x===b));tab=b.dataset.t;render();
+});
+
+/* ---------- Renderização ---------- */
+function cardHTML(l){
+  const ill=l.difficulty==="ILL";
+  return `<div class="card ${ill?"ill":""}" style="--c:${col(l.difficulty)}" data-id="${l.id}">
+  <div class="thumb">${l.image?`<img loading="lazy" src="${l.image}" alt="">`:"GD"}</div>
+  <div class="info"><h3>${esc(l.name)}</h3><div class="meta">por ${esc(l.creator)} · ID ${esc(l.gdId)}</div>
+  <div class="meta">${fmt(l.createdAt)}</div><span class="chip ${ill?"ill":""}">${esc(l.difficulty)}</span></div></div>`;
+}
+function render(){
+  if(!$("s-app")||$("s-app").classList.contains("hide"))return;
+  $("v-list").classList.toggle("hide",tab!=="list");
+  const out=$("out"),sorted=[...levels].sort((a,b)=>newest?(b.createdAt||0)-(a.createdAt||0):(a.createdAt||0)-(b.createdAt||0));
+  if(!levels.length){$("cnt").textContent="0 níveis publicados";out.innerHTML=`<div class="empty"><h3>Nenhum level publicado ainda</h3><p>${isAdmin?"Use “Publicar novo level” para começar a lista.":"Volte mais tarde: os levels aparecem aqui assim que forem publicados."}</p></div>`;return}
+  if(tab==="list"){
+    const q=$("q").value.trim().toLowerCase(),f=$("fd").value;
+    const r=sorted.filter(l=>(!f||l.difficulty===f)&&(!q||[l.name,l.creator,l.gdId].some(x=>String(x).toLowerCase().includes(q))));
+    $("cnt").textContent=`${r.length} de ${levels.length} níveis publicados`;
+    out.innerHTML=r.length?`<div class="grid">${r.map(cardHTML).join("")}</div>`:`<div class="empty">Nenhum level encontrado com esses filtros.</div>`;
+  }else if(tab==="ill"){
+    const r=sorted.filter(l=>l.difficulty==="ILL");
+    $("cnt").textContent=`${r.length} ILL – Impossible Levels`;
+    out.innerHTML=r.length?`<div class="grid">${r.map(cardHTML).join("")}</div>`:`<div class="empty">Nenhum ILL publicado.</div>`;
+  }else{
+    const n=levels.filter(l=>l.difficulty!=="ILL").length;
+    $("cnt").textContent=`${n} níveis no ranking · ILL fica separado`;
+    const sec=(d,ill)=>{
+      const r=sorted.filter(l=>l.difficulty===d);if(!r.length)return"";
+      return `<div class="sec ${ill?"ill":""}" style="--c:${col(d)}"><h3><span>${ill?"ILL – IMPOSSIBLE LEVELS":d}</span><span>${r.length}</span></h3><ul>${r.map(l=>`<li data-id="${l.id}">${esc(l.name)} <span class="meta">— ${esc(l.creator)} · ${esc(l.gdId)}</span></li>`).join("")}</ul></div>`;
+    };
+    out.innerHTML=D.slice(0,11).reverse().map(d=>sec(d[0])).join("")+sec("ILL",true)||`<div class="empty">Sem níveis.</div>`;
+  }
+}
+$("out").onclick=e=>{const t=e.target.closest("[data-id]");if(t)openDetail(t.dataset.id)};
+
+/* ---------- Modais ---------- */
+function modal(html){
+  const m=document.createElement("div");m.className="modal";m.innerHTML=`<div class="mbox">${html}</div>`;
+  m.onclick=e=>{if(e.target===m)m.remove()};document.body.append(m);return m;
+}
+function openDetail(id){
+  const l=levels.find(x=>x.id===id);if(!l)return;
+  const m=modal(`${l.image?`<img class="big" src="${l.image}" alt="">`:""}<h2>${esc(l.name)}</h2>
+  <p class="meta">Criador: ${esc(l.creator)}<br>ID: ${esc(l.gdId)}<br>Publicado em ${fmt(l.createdAt)}</p>
+  <span class="chip ${l.difficulty==="ILL"?"ill":""}" style="--c:${col(l.difficulty)}">${esc(l.difficulty)}</span>
+  <p style="margin-top:12px;white-space:pre-wrap">${esc(l.description||"Sem descrição.")}</p>
+  <div class="row"><button class="btn" id="m-copy">Copiar ID</button>${isAdmin?'<button class="btn" id="m-ed">Editar</button><button class="btn red" id="m-del">Excluir</button>':""}<button class="btn" id="m-x">Fechar</button></div>`);
+  m.querySelector("#m-x").onclick=()=>m.remove();
+  m.querySelector("#m-copy").onclick=()=>navigator.clipboard?.writeText(String(l.gdId)).then(()=>toast("ID copiado.","ok"));
+  if(isAdmin){
+    m.querySelector("#m-ed").onclick=()=>{m.remove();openForm(l)};
+    m.querySelector("#m-del").onclick=()=>{
+      const c=modal(`<h2>Excluir level?</h2><p class="q">“${esc(l.name)}” será removido para todos. Isso não pode ser desfeito.</p><div class="row"><button class="btn" id="c-n">Cancelar</button><button class="btn red" id="c-y">Excluir</button></div>`);
+      c.querySelector("#c-n").onclick=()=>c.remove();
+      c.querySelector("#c-y").onclick=async()=>{try{await remove(ref(db,"levels/"+id));toast("Level excluído.","ok");c.remove();m.remove()}catch(e){toast("Falha ao excluir: "+e.code,"err")}};
+    };
+  }
+}
+$("b-new").onclick=()=>openForm();
+
+function compress(file,max=900,q=.72){
+  return new Promise((res,rej)=>{
+    const img=new Image(),u=URL.createObjectURL(file);
+    img.onload=()=>{
+      let s=Math.min(1,max/Math.max(img.width,img.height)),out;
+      const c=document.createElement("canvas");
+      for(let i=0;i<5;i++){
+        c.width=Math.round(img.width*s);c.height=Math.round(img.height*s);
+        c.getContext("2d").drawImage(img,0,0,c.width,c.height);
+        out=c.toDataURL("image/jpeg",q);if(out.length<300000)break;s*=.8;q*=.9;
+      }
+      URL.revokeObjectURL(u);out.length<400000?res(out):rej(new Error("Imagem grande demais"));
+    };
+    img.onerror=()=>rej(new Error("Arquivo de imagem inválido"));img.src=u;
+  });
+}
+function openForm(l){
+  let diff=l?.difficulty||"",image=l?.image||"";
+  const m=modal(`<h2>${l?"Editar level":"Publicar novo level"}</h2>
+  <label>Nome do level</label><input id="f-n" maxlength="80" value="${esc(l?.name)}">
+  <label>Nome do criador</label><input id="f-c" maxlength="60" value="${esc(l?.creator)}">
+  <label>ID do Geometry Dash</label><input id="f-i" inputmode="numeric" maxlength="12" value="${esc(l?.gdId)}">
+  <label>Dificuldade (obrigatória)</label><div class="dgrid" id="f-d">${D.map(d=>`<div class="dopt ${d[0]==="ILL"?"ill":""} ${d[0]===diff?"on":""}" data-d="${d[0]}" style="--c:${d[1]}"><i></i>${d[0]==="ILL"?"ILL – Impossible":d[0]}</div>`).join("")}</div>
+  <label>Imagem / screenshot</label><input type="file" id="f-f" accept="image/*"><div class="pv" id="f-p"></div>
+  <label>Descrição</label><textarea id="f-ds" rows="3" maxlength="600">${esc(l?.description)}</textarea>
+  <div class="row"><button class="btn" id="f-x">Cancelar</button><button class="btn pri" id="f-s">${l?"Salvar alterações":"Publicar"}</button></div>`);
+  const pv=()=>{m.querySelector("#f-p").innerHTML=image?`<img src="${image}" alt=""><div class="row"><button class="btn sm red" id="f-rm">Remover imagem</button></div>`:"";const r=m.querySelector("#f-rm");if(r)r.onclick=()=>{image="";m.querySelector("#f-f").value="";pv()}};pv();
+  m.querySelectorAll(".dopt").forEach(o=>o.onclick=()=>{diff=o.dataset.d;m.querySelectorAll(".dopt").forEach(x=>x.classList.toggle("on",x===o))});
+  m.querySelector("#f-f").onchange=async e=>{const f=e.target.files[0];if(!f)return;try{image=await compress(f);pv()}catch(er){toast(er.message,"err")}};
+  m.querySelector("#f-x").onclick=()=>m.remove();
+  m.querySelector("#f-s").onclick=async()=>{
+    const d={name:m.querySelector("#f-n").value.trim(),creator:m.querySelector("#f-c").value.trim(),gdId:m.querySelector("#f-i").value.trim(),difficulty:diff,image,description:m.querySelector("#f-ds").value.trim()};
+    if(!d.name||!d.creator||!d.gdId)return toast("Preencha nome, criador e ID.","err");
+    if(!/^\d{1,12}$/.test(d.gdId))return toast("O ID deve conter apenas números.","err");
+    if(!diff)return toast("Escolha uma dificuldade.","err");
+    const b=m.querySelector("#f-s");b.disabled=true;
+    try{
+      if(l)await update(ref(db,"levels/"+l.id),d);
+      else await set(push(ref(db,"levels")),{...d,createdAt:serverTimestamp()});
+      toast(l?"Level atualizado.":"Level publicado.","ok");m.remove();
+    }catch(e){b.disabled=false;toast("Falha ao salvar: "+(e.code==="PERMISSION_DENIED"?"sem permissão de administrador":e.code||e.message),"err")}
+  };
+}
+</script>
+</body>
+</html>
